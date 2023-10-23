@@ -8,6 +8,7 @@ use App\Models\IncomeCategory;
 use Carbon\Carbon;
 use Session;
 use Auth;
+use Illuminate\Validation\Rules\Unique;
 
 class IncomeCategoryController extends Controller{
 
@@ -24,46 +25,73 @@ class IncomeCategoryController extends Controller{
 
         return view('admin.income.category.add'); }
 
-    public function edit(){
+    public function edit($slug){
         
-        return view('admin.income.category.edit'); }
+        $data=IncomeCategory::where('incate_status',1)->where('incate_slug',$slug)->FirstOrFail();
+        
+        return view('admin.income.category.edit', compact('data')); }
     
-    public function view(){
+    public function view($slug){
+        $data=IncomeCategory::where('incate_status',1)->where('incate_slug',$slug)->FirstOrFail();
         
-        return view('admin.income.category.view'); }
+        return view('admin.income.category.view', compact('data')); }
 
     public function insert(request $request){
 
         $this->validate($request,[
-
+            'name' => 'required | max:50 | Unique:income_categories,incate_name',
         ],[
-
+            'name.required' => 'Please enter your income category name',
         ]);
 
         $slug=Str::slug($request['name'], '-');
         $creator=Auth::user()->id;
 
-        IncomeCategory::insert([
+        $insert=IncomeCategory::insert([
             'incate_name' =>$request['name'],
             'incate_remarks' =>$request['remarks'],
             'incate_creator' =>$creator,
             'incate_slug' =>$slug,
             'created_at' =>Carbon::now()->toDateTimeString(),
-            ]); }
+            ]); 
 
-    public function update(){
-        
-        return view(''); }
+            if($insert){
+                Session::flash('success','Successfully Created');
+                return redirect('dashboard/income/category/add');
+            }else{
+                Session::flash('error','Opps! Something went wrong.');
+                return redirect('dashboard/income/category/add');
+            }
+        }
 
-    public function softdelete(){
+    public function update(Request $request){
         
-        return view(''); }
+        $id=$request['id'];
+        $this->validate($request,[
+            'name' => 'required | max:50 | Unique:income_categories,incate_name','.$id.','incate_id',
+        ],[
+            'name.required' => 'Please enter your income category name',
+        ]);
 
-    public function restore(){
         
-        return view(''); }
+        $slug=Str::slug($request['name'], '-');
+        $editor=Auth::user()->id;
 
-    public function delete(){
-        
-        return view(''); }
+        $update=IncomeCategory::where('incate_status',1)->where('incate_id',$id)->update([
+            'incate_name' =>$request['name'],
+            'incate_remarks' =>$request['remarks'],
+            'incate_editor' =>$editor,
+            'incate_slug' =>$slug,
+            'updated_at' =>Carbon::now()->toDateTimeString(),
+            ]); 
+
+            if($update){
+                Session::flash('success','Successfully Updated');
+                return redirect('dashboard/income/category/view/'.$slug);
+            }else{
+                Session::flash('error','Opps! Something went wrong.');
+                return redirect('dashboard/income/category/edit/'.$slug);
+            }
+    }
+
 }
