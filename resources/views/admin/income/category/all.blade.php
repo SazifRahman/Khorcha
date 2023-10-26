@@ -34,7 +34,7 @@
                               <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{url('dashboard/income/category/view/'.$data->incate_slug)}}">View</a></li>
                                 <li><a class="dropdown-item" href="{{url('dashboard/income/category/edit/'.$data->incate_slug)}}">Edit</a></li>
-                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="{{$data->incate_id}}"> Delete</a></li>
                               </ul>
                             </div>
                         </td>
@@ -53,5 +53,29 @@
               </div>
           </div>
       </div>
+
+      <!-- Delete Modal Code Start -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="POST" action="{{url('dashboard/income/category/softdelete')}}">
+    @csrf
+      <div class="modal-content modal_content">
+        <div class="modal-header modal_header">
+          <h1 class="modal-title modal_title" id="exampleModalLabel"> <i class="fas fa-bell"></i> Attention! </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body modal_body">
+          Are you sure to Delete?
+          <input type="text" name="modal_id" id="modal_id"/>
+        </div>
+        <div class="modal-footer modal_footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Confirm</button>
+          <!-- <button type="button" class="btn btn-secondary">Close</button> -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 @endsection

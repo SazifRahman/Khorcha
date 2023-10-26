@@ -38,6 +38,20 @@
                       <td>:</td>  
                       <td>{{$data->created_at->format('d F - Y | h:i A')}}</td>  
                     </tr>
+                    @if($data->incate_editor!='')
+                    <tr>
+                      <td>Editor</td>  
+                      <td>:</td>  
+                      <td>{{$data->editorInfo->name}}</td> 
+                    </tr>
+                    @endif
+                    @if($data->updated_at!='')
+                    <tr>
+                      <td>Update Time</td>  
+                      <td>:</td>  
+                      <td>{{$data->updated_at->format('d F - Y | h:i A')}}</td>  
+                    </tr>
+                    @endif
                   </table>
               </div>
               <div class="col-md-2"></div>

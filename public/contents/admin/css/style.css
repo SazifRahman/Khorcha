@@ -290,3 +290,28 @@ span.req_star{
 .has-error .invalid-feedback{
     display: block;
 }
+
+.modal_content{
+
+}
+
+.modal_header{
+
+}
+
+.modal_title{
+
+    font-size: 20px;
+    font-weight: 700;
+
+}
+
+.modal_body{
+
+    font-size: 18px;
+
+}
+
+.modal_footer{
+
+}

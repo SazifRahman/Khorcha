@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('incate_name', 50)-> unique();
             $table->string('incate_remarks', 200)-> nullable();
             $table->integer('incate_creator')-> nullable();
+            $table->integer('incate_editor')-> nullable();
             $table->string('incate_slug', 30)-> nullable();
             $table->integer('incate_status')-> default(1);
             $table->timestamps();

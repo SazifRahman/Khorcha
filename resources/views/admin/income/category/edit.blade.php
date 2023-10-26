@@ -47,7 +47,7 @@
                     <div class="row mb-3">
                       <label class="col-sm-3 col-form-label col_form_label">Remarks:</label>
                       <div class="col-sm-7">
-                        <textarea class="form-control form_control" id="" name="remarks">{{$data->incate_remarks}}</textarea>
+                        <textarea class="form-control form_control" id="" name="remarks"> {{$data->incate_remarks}}"</textarea>
                       </div>
                     </div>
                 </div>

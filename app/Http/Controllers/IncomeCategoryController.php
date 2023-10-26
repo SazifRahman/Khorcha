@@ -89,9 +89,31 @@ class IncomeCategoryController extends Controller{
                 Session::flash('success','Successfully Updated');
                 return redirect('dashboard/income/category/view/'.$slug);
             }else{
-                Session::flash('error','Opps! Something went wrong.');
+                Session::flash('error','Opps! Something went wrong');
                 return redirect('dashboard/income/category/edit/'.$slug);
             }
     }
+    public function softdelete($id){
 
+        $soft=IncomeCategory::where('incate_status',1)->where('incate_id',$id)->update([
+            'incate_status'=>0,
+            'updated_at'=>Carbon::now()->toDateTimeString(),
+            ]);
+            
+            if($soft){
+                Session::flash('success','Successfully delete.');
+                return redirect('dashboard/income/category');
+            }else{
+                Session::flash('error','Opps! Failed.');
+                return redirect('dashboard/income/category');
+            }
+            }
+
+    public function restore(){
+
+        return view('admin.income.category.add'); }  
+
+    public function delete(){
+
+        return view('admin.income.category.add'); }        
 }
