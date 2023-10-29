@@ -12,7 +12,7 @@
                           <i class="fab fa-gg-circle"></i> Add Income Category Information
                       </div>  
                       <div class="col-md-4 card_button_part">
-                          <a href="{{url('dashboard/income/category/submit')}}" class="btn btn-sm btn-dark"><i class="fas fa-th"></i> All Category</a>
+                          <a href="{{url('dashboard/income/category')}}" class="btn btn-sm btn-dark"><i class="fas fa-th"></i> All Category</a>
                       </div>  
                   </div>
                 </div>

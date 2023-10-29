@@ -8,7 +8,8 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\IncomeCategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseCategoryController;
-
+use app\Http\Controllers\ReportController;
+use app\Http\Controllers\RecycleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,7 @@ Route::get('/dashboard/income/category', [IncomeCategoryController::class, 'inde
 Route::get('/dashboard/income/category/add', [IncomeCategoryController::class, 'add']);
 Route::get('/dashboard/income/category/edit/{slug}', [IncomeCategoryController::class, 'edit']);
 Route::get('/dashboard/income/category/view/{slug}', [IncomeCategoryController::class, 'view']);
-Route::post('/dashboard/income/category/submit', [IncomeCategoryController::class, 'insert']);
+Route::get('/dashboard/income/category/submit', [IncomeCategoryController::class, 'insert']);
 Route::post('/dashboard/income/category/update', [IncomeCategoryController::class, 'update']);
 Route::post('/dashboard/income/category/softdelete', [IncomeCategoryController::class, 'softdelete']);
 Route::post('/dashboard/income/category/restore', [IncomeCategoryController::class, 'restore']);
@@ -93,6 +94,12 @@ Route::post('/dashboard/expense/category/update', [ExpenseCategoryController::cl
 Route::post('/dashboard/expense/category/softdelete', [ExpenseCategoryController::class, 'softdelete']);
 Route::post('/dashboard/expense/category/restore', [ExpenseCategoryController::class, 'restore']);
 Route::post('/dashboard/expense/category/delete', [ExpenseCategoryController::class, 'delete']);
+
+
+Route::get('/dashboard/report', [ReportController::class, 'index']);
+
+
+Route::get('/dashboard/recycle', [RecycleController::class, 'index']);
 
 
 require __DIR__.'/auth.php';

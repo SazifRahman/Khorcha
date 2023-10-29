@@ -19,15 +19,15 @@
                 <div class="card-body">
 
                       @if(Session::has('success'))
-                      <div class="alert alert-success alert_success" role="alert">
-                      <strong>Success!</strong> {{Session::get('success')}}
-                      </div>
+                        <div class="alert alert-success alert_success" role="alert">
+                          <strong>Success!</strong> {{Session::get('success')}}
+                        </div>
                       @endif
 
                       @if(Session::has('error'))
-                      <div class="alert alert-danger aletr_error" role="alert">
-                      <strong> Opps! </strong> {{Session::get('error')}}
-                      </div>
+                        <div class="alert alert-danger aletr_error" role="alert">
+                          <strong> Opps! </strong> {{Session::get('error')}}
+                        </div>
                       @endif
 
                       <div class="row mb-3 {{ $errors->has('name') ? ' has-error' : '' }}">
